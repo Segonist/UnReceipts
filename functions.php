@@ -8,7 +8,22 @@ function dd($variable)
     die();
 }
 
-function is_user_logged_in()
+function check_user_logged_in()
 {
-    return isset($_SESSION["account_id"]);
+    if (!isset($_SESSION["account_id"])) {
+        header("Location: /login");
+    }
+}
+
+function alert($message)
+{
+    echo ("<script>alert('{$message}')</script>");
+}
+
+function init_database($config)
+{
+    include("Database.php");
+    $db_config = $config["db_config"];
+    $db = new Database($db_config, $db_config["username"], $db_config["password"]);
+    return $db;
 }
