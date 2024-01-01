@@ -5,7 +5,7 @@
 $title = "Not Found";
 include("partials/head.php");
 ?>
-<!-- <link rel="stylesheet" href="assets/styles/404.css"> -->
+<link rel="stylesheet" href="assets/styles/404.css">
 
 <body>
 

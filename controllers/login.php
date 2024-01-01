@@ -1,17 +1,42 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require("Validator.php");
     $db = init_database($config);
 
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $user = $db->query("SELECT * FROM users WHERE username='{$username}' AND password='{$password}';")->fetch();
 
-    if (!$user) {
-        alert("Wrong username or password");
+    $errors = [];
+
+    $valid_username = Validator::valid_string(
+        $string = $username
+    );
+    if ($valid_username !== true) {
+        $errors[] = $valid_username;
+    }
+
+    $valid_password = Validator::valid_string(
+        $string = $password
+    );
+    if ($valid_password !== true) {
+        $errors[] = $valid_password;
+    }
+
+    if (empty($errors)) {
+        $query = "SELECT * FROM users WHERE username=:username AND password=:password;";
+        $user = $db->query($query, ["username" => $username, "password" => $password])->fetch();
+
+        if (!$user) {
+            alert("Wrong username or password");
+        } else {
+            $_SESSION["account_id"] = $user["id"];
+            header("Location: /dashboard");
+        }
     } else {
-        $_SESSION["account_id"] = $user["id"];
-        header("Location: /dashboard");
+        foreach ($errors as $error) {
+            alert($error);
+        }
     }
 }
 
