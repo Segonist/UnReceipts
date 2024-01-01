@@ -3,21 +3,24 @@
 
 <?php
 $title = "Dashboard";
-include("partials/head.php");
+require(base_path("views/partials/head.php"));
 ?>
 
 <body>
 
-    <?php require("partials/header.php"); ?>
+    <?php require(base_path("views/partials/header.php")); ?>
 
     <main class="glass">
         Dashboard of user
         <?= $user ?>
         <br>
-        <a href="log_out.php">Log out</a>
+        <form method="get">
+            <input type="hidden" name="action" value="log_out">
+            <input class="btn" type="submit" value="Log out">
+        </form>
     </main>
 
-    <?php require("partials/footer.php") ?>
+    <?php require(base_path("views/partials/footer.php")) ?>
 
 </body>
 

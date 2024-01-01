@@ -1,14 +1,13 @@
 <?php
 
+$errors = [];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require("Validator.php");
     $db = init_database($config);
 
     $username = $_POST["username"];
     $password = $_POST["password"];
     $repeat_password = $_POST["repeat_password"];
-
-    $errors = [];
 
     $valid_username = Validator::valid_string(
         $string = $username,
@@ -51,4 +50,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-require("views/register.view.php");
+view("register.view.php");

@@ -1,23 +1,24 @@
 <?php
 
+$errors = [];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require("Validator.php");
     $db = init_database($config);
 
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $errors = [];
-
     $valid_username = Validator::valid_string(
-        $string = $username
+        $string = $username,
+        $empty = "Username is required"
     );
     if ($valid_username !== true) {
         $errors[] = $valid_username;
     }
 
     $valid_password = Validator::valid_string(
-        $string = $password
+        $string = $password,
+        $empty = "Password is required"
     );
     if ($valid_password !== true) {
         $errors[] = $valid_password;
@@ -40,5 +41,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-
-require("views/login.view.php");
+view("login.view.php");

@@ -3,13 +3,13 @@
 
 <?php
 $title = "Register page";
-include("partials/head.php");
+require(base_path("views/partials/head.php"));
 ?>
 <link rel="stylesheet" href="assets/styles/auth.css">
 
 <body>
 
-    <?php require("partials/header.php"); ?>
+    <?php require(base_path("views/partials/header.php")); ?>
 
     <main class="glass auth">
         <form method="post" autocomplete="off">
@@ -25,7 +25,7 @@ include("partials/head.php");
         <p>Already have an account? <button class="btn"><a href="/login">Log in!</a></button></p>
     </main>
 
-    <?php require("partials/footer.php") ?>
+    <?php require(base_path("views/partials/footer.php")) ?>
 
 </body>
 

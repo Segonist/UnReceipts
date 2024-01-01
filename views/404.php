@@ -3,13 +3,13 @@
 
 <?php
 $title = "Not Found";
-include("partials/head.php");
+require(base_path("views/partials/head.php"));
 ?>
 <link rel="stylesheet" href="assets/styles/404.css">
 
 <body>
 
-    <?php require("views/partials/header.php") ?>
+    <?php require(base_path("views/partials/header.php")) ?>
     <div class="glass e404">
         <h3>Resource is not found.</h3>
         <img src="assets/img/desintegration.gif" alt="not found">
@@ -17,7 +17,7 @@ include("partials/head.php");
 
     </div>
 
-    <?php require("views/partials/footer.php") ?>
+    <?php require(base_path("views/partials/footer.php")) ?>
 
 </body>
 
