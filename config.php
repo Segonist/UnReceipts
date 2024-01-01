@@ -9,7 +9,7 @@ return [
             "dbname" => "unreceipts",
             "charset" => "utf8mb4",
         ],
-        "username" => "root",
-        "password" => ""
+        "username" => "unreceipts",
+        "password" => "Pi6a^c9njcj]"
     ]
 ];
