@@ -24,7 +24,7 @@ function alert($message)
 function init_database($config)
 {
     $db_config = $config["db_config"];
-    $db = new Database($db_config, $db_config["username"], $db_config["password"]);
+    $db = new Core\Database($db_config, $db_config["username"], $db_config["password"]);
     return $db;
 }
 
@@ -44,4 +44,5 @@ function log_out()
     session_start();
     unset($_SESSION["account_id"]);
     header("Location: /");
+    die();
 }
