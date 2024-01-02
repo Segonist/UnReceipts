@@ -8,12 +8,9 @@ function dd($variable)
     die();
 }
 
-function check_user_logged_in()
+function user_logged_in()
 {
-    if (!isset($_SESSION["account_id"])) {
-        header("Location: /login");
-        die();
-    }
+    return isset($_SESSION["account_id"]);
 }
 
 function alert($message)

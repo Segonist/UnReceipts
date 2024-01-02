@@ -1,13 +1,12 @@
 <?php
 
-check_user_logged_in();
+if (!user_logged_in()) {
+    header("Location: /login");
+    die();
+}
 
 $user = $_SESSION["account_id"];
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if (isset($_GET["action"]) && $_GET["action"] == "log_out") {
-        log_out();
-    }
-}
-
-view("dashboard.view.php", array("user" => $user));
+view("dashboard.view.php", [
+    "user" => $user
+]);
