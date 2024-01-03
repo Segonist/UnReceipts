@@ -8,9 +8,18 @@ function dd($variable)
     die();
 }
 
-function user_logged_in()
+function user_logged_in($return_to = false)
 {
-    return isset($_SESSION["account_id"]);
+    if (isset($_SESSION["account_id"])) {
+        return true;
+    } else {
+        if ($return_to) {
+            header("Location: {$return_to}");
+            die();
+        } else {
+            return false;
+        }
+    }
 }
 
 function alert($message)
