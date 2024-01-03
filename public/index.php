@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="assets/styles/variables.css">
-<link rel="stylesheet" href="assets/styles/index.css">
-
 <?php
 
 ini_set('display_errors', 1);
@@ -23,4 +20,5 @@ require(base_path("Core/router.php"));
 
 ?>
 
+<link type="text/css" rel="stylesheet" href="<?= host_path('assets/styles/index.css') ?>">
 <script src="assets/js/preventDrag.js"></script>

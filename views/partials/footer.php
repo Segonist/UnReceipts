@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="assets/styles/footer.css">
 <footer class="glass">
     <div class="autor-info">
         <p>Made By <span>Segonist</span></p>

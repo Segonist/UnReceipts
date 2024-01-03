@@ -18,14 +18,19 @@ header .header-right {
   height: 100%;
   display: flex;
   align-items: center;
+  width: max-content;
 }
 
 .header-left > a {
-  margin-right: 15px;
+  height: 100%;
 }
 
 header * {
   font-size: 25px;
+}
+
+header h1 {
+  margin-left: 15px;
 }
 
 header h1 span {
@@ -57,6 +62,7 @@ header .profile-picture {
 }
 
 .user-actions {
+  z-index: 10000;
   position: absolute;
   top: 65px;
   right: 20px;

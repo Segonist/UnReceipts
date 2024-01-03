@@ -5,7 +5,6 @@
 $title = "Login page";
 require(base_path("views/partials/head.php"));
 ?>
-<link rel="stylesheet" href="assets/styles/auth.css">
 
 <body>
 

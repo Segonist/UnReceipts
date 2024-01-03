@@ -45,6 +45,10 @@ function view($view, $attributes = [])
     require base_path("views/{$view}");
 }
 
+function host_path($path) {
+    return "http://{$_SERVER["HTTP_HOST"]}/{$path}";
+}
+
 function log_out()
 {
     session_start();

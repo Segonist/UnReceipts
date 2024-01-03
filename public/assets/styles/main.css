@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  font-family: "Balsamiq Sans", sans-serif;
+  font-size: 20px;
+  color: var(--text);
+  margin: 0;
+}
+
+body {
+  background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-image: url(../img/background.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.glass {
+  background: transparent;
+  backdrop-filter: blur(10px);
+}
+
+.btn {
+  border-radius: 7px;
+  border: 1px solid var(--secondary);
+  padding: 5px 10px;
+  background-color: transparent;
+  width: max-content;
+}
+
+.btn:hover {
+  filter: brightness(90%);
+}
+
+.btn:active {
+  border-color: hsl(0, 0%, 80%);
+}

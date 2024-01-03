@@ -1,15 +1,11 @@
-<link rel="stylesheet" href="assets/styles/header.css">
 <header class="glass">
-    <div class="header-left">
-        <a href="/"><img src="assets/img/logo.svg"></a>
-        <a href="/">
+        <a class="header-left" href="/">
+            <img src="<?= host_path('assets/img/logo.svg') ?>">
             <h1><span>Un</span>Receipts</h1>
         </a>
-        <nav></nav>
-    </div>
     <div class="header-right">
         <div class="language">🇺🇸</div>
-        <button class="btn profile-picture toggle-menu-button"><img src="assets/img/user.svg"></button>
+        <button class="btn profile-picture toggle-menu-button"><img src="<?= host_path('assets/img/user.svg') ?>"></button>
     </div>
 </header>
 <div class="glass user-actions toggle-menu" tabIndex="-1">
