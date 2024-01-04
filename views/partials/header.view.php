@@ -22,4 +22,4 @@
     <?php endif; ?>
 </div>
 
-<script src="assets/js/toggleMenu.js"></script>
+<script src="<?= host_path('assets/js/toggleMenu.js') ?>"></script>
