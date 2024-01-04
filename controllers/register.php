@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $string = $password,
         $empty = "Password is required",
         $not_in_range = ["min" => 8, "max" => 32, "message" => "Password must be between 8 and 32 characters"],
-        $reg_exps = ["/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" => "Password must contain at least one letter and number"],
+        $reg_exps = ["/^(?=.*[a-zA-Z])(?=.*\d).+$/" => "Password must contain at least one letter and number"],
         $equals = [$password, $repeat_password, "message" => "Passwords do not match"]
     );
     if ($valid_password !== true) {
