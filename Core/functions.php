@@ -27,8 +27,9 @@ function alert($message)
     echo ("<script>alert('{$message}')</script>");
 }
 
-function init_database($config)
+function init_database()
 {
+    $config = require(base_path("config.php"));
     $db_config = $config["db_config"];
     $db = new Core\Database($db_config, $db_config["username"], $db_config["password"]);
     return $db;
@@ -45,8 +46,15 @@ function view($view, $attributes = [])
     require base_path("views/{$view}");
 }
 
-function host_path($path) {
+function host_path($path)
+{
     return "http://{$_SERVER["HTTP_HOST"]}/{$path}";
+}
+
+function abort($code = 404, $message = "")
+{
+    http_response_code($code);
+    return view("error.php", ["code" => $code, "message" => $message]);
 }
 
 function log_out()

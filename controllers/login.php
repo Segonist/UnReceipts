@@ -5,7 +5,7 @@ use Core\Validator;
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $db = init_database($config);
+    $db = init_database();
 
     $username = $_POST["username"];
     $password = $_POST["password"];
