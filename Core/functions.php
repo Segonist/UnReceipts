@@ -27,14 +27,6 @@ function alert($message)
     echo ("<script>alert('{$message}')</script>");
 }
 
-function init_database()
-{
-    $config = require(base_path("config.php"));
-    $db_config = $config["db_config"];
-    $db = new Core\Database($db_config, $db_config["username"], $db_config["password"]);
-    return $db;
-}
-
 function base_path($path)
 {
     return BASE_PATH . $path;

@@ -1,11 +1,12 @@
 <?php
 
+use Core\App;
 use Core\Validator;
 
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $db = init_database();
+    $db = App::resolve('Core\Database');
 
     $username = $_POST["username"];
     $password = $_POST["password"];
