@@ -8,20 +8,6 @@ function dd($variable)
     die();
 }
 
-function user_logged_in($return_to = false)
-{
-    if (isset($_SESSION["account_id"])) {
-        return true;
-    } else {
-        if ($return_to) {
-            header("Location: {$return_to}");
-            die();
-        } else {
-            return false;
-        }
-    }
-}
-
 function alert($message)
 {
     echo ("<script>alert('{$message}')</script>");
@@ -52,7 +38,7 @@ function abort($code = 404, $message = "")
 function log_out()
 {
     session_start();
-    unset($_SESSION["account_id"]);
+    unset($_SESSION["user"]);
     header("Location: /");
     die();
 }

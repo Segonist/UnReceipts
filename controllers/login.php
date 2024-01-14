@@ -5,6 +5,8 @@ use Core\Validator;
 
 $errors = [];
 
+$title = "Log in | UnReceipts";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -28,20 +30,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $db = App::resolve('Core\Database');
 
-        $query = "SELECT * FROM users WHERE username=:username AND password=:password;";
-        $user = $db->query($query, ["username" => $username, "password" => $password])->fetch();
+        $query = "SELECT * FROM users WHERE username=:username";
+        $user = $db->query($query, ["username" => $username])->fetch();
 
         if (!$user) {
-            alert("Wrong username or password");
+            $errors[] = "Wrong username or password";
+            return view(
+                "login.view.php",
+                [
+                    "title" => $title,
+                    "errors" => $errors
+                ]
+            );
         } else {
-            $_SESSION["account_id"] = $user["id"];
+            $password_hash = $user["password"];
+        }
+
+        if (password_verify($password, $password_hash)) {
+            $_SESSION["user"] = $username;
             header("Location: /dashboard");
+            die();
+        } else {
+            $errors[] = "Wrong username or password";
+            return view(
+                "login.view.php",
+                [
+                    "title" => $title,
+                    "errors" => $errors
+                ]
+            );
         }
     } else {
-        foreach ($errors as $error) {
-            alert($error);
-        }
+        return view(
+            "login.view.php",
+            [
+                "title" => $title,
+                "errors" => $errors
+            ]
+        );
     }
 }
 
-view("login.view.php");
+view(
+    "login.view.php",
+    [
+        "title" => $title
+    ]
+);

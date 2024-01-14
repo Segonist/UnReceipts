@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require(base_path("views/partials/top_html_tags.php")); ?>
 
-<?php
-$title = "Dashboard";
-require(base_path("views/partials/head.php"));
-?>
+<?php require(base_path("views/partials/header.php")); ?>
 
-<body>
+<main class="glass">
+    Dashboard of user
+    <?= $user ?>
+</main>
 
-    <?php require(base_path("views/partials/header.php")); ?>
+<?php require(base_path("views/partials/footer.php")) ?>
 
-    <main class="glass">
-        Dashboard of user
-        <?= $user ?>
-    </main>
-
-    <?php require(base_path("views/partials/footer.php")) ?>
-
-</body>
-
-</html>
+<?php require(base_path("views/partials/bottom_html_tags.php")); ?>

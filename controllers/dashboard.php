@@ -1,9 +1,8 @@
 <?php
 
-user_logged_in("/login");
-
-$user = $_SESSION["account_id"];
+$user = $_SESSION["user"];
 
 view("dashboard.view.php", [
+    "title" => "Dashboard | UnReceipts",
     "user" => $user
 ]);

@@ -1,15 +1,15 @@
 <header class="glass">
-        <a class="header-left" href="/">
-            <img src="<?= host_path('assets/img/logo.svg') ?>">
-            <h1><span>Un</span>Receipts</h1>
-        </a>
+    <a class="header-left" href="/">
+        <img src="<?= host_path('assets/img/logo.svg') ?>">
+        <h1><span>Un</span>Receipts</h1>
+    </a>
     <div class="header-right">
         <div class="language">🇺🇸</div>
         <button class="btn profile-picture toggle-menu-button"><img src="<?= host_path('assets/img/user.svg') ?>"></button>
     </div>
 </header>
 <div class="glass user-actions toggle-menu" tabIndex="-1">
-    <?php if (user_logged_in() == true) : ?>
+    <?php if ($_SESSION["user"] ?? false) : ?>
         <a href="/dashboard" class="btn user-action-button">Dashboard</a>
         <a href="#" class="btn user-action-button">Settings</a>
         <form method="get">
