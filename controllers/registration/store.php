@@ -33,33 +33,7 @@ if ($valid_password !== true) {
     $errors[] = $valid_password;
 }
 
-if (empty($errors)) {
-    $db = App::resolve(Database::class);
-
-    $query = "SELECT * FROM users WHERE username=:username;";
-    $user = $db->query($query, ["username" => $username])->fetch();
-
-    if ($user) {
-        $errors[] = "Account with username {$username} alredy exist";
-        return view(
-            "registration/create.view.php",
-            [
-                "errors" => $errors,
-                "title" => $title
-            ]
-        );
-    } else {
-        $query = "INSERT INTO users (username, password) VALUES (:username, :password);";
-        $user = $db->query($query, [
-            "username" => $username,
-            "password" => password_hash($password, PASSWORD_BCRYPT)
-        ]);
-
-        $_SESSION["user"] = $db->lastInsertid();
-        header("Location: /dashboard");
-        die();
-    }
-} else {
+if (!empty($errors)) {
     return view(
         "registration/create.view.php",
         [
@@ -67,4 +41,30 @@ if (empty($errors)) {
             "title" => $title
         ]
     );
+}
+
+$db = App::resolve(Database::class);
+
+$query = "SELECT * FROM users WHERE username=:username;";
+$user = $db->query($query, ["username" => $username])->fetch();
+
+if ($user) {
+    $errors[] = "Account with username {$username} alredy exist";
+    return view(
+        "registration/create.view.php",
+        [
+            "errors" => $errors,
+            "title" => $title
+        ]
+    );
+} else {
+    $query = "INSERT INTO users (username, password) VALUES (:username, :password);";
+    $db->query($query, [
+        "username" => $username,
+        "password" => password_hash($password, PASSWORD_BCRYPT)
+    ]);
+
+    login($username);
+    header("Location: /dashboard");
+    die();
 }

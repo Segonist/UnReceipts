@@ -62,7 +62,7 @@ class Router
             } else {
                 continue;
             }
-            if ($route["method"] === $method) {
+            if ($route["method"] === strtoupper($method)) {
                 $correct_method = true;
             } else {
                 continue;

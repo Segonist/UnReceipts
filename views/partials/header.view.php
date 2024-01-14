@@ -12,8 +12,8 @@
     <?php if ($_SESSION["user"] ?? false) : ?>
         <a href="/dashboard" class="btn user-action-button">Dashboard</a>
         <a href="#" class="btn user-action-button">Settings</a>
-        <form method="get">
-            <input type="hidden" name="action" value="log_out">
+        <form method="POST" action="/login">
+            <input type="hidden" name="_request_method" value="DELETE">
             <input class="btn user-action-button" type="submit" value="Log out">
         </form>
     <?php else : ?>

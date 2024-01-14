@@ -1,8 +1,10 @@
 <?php
 
+$title = "Dashboard | UnReceipts";
+
 $user = $_SESSION["user"];
 
 view("dashboard.view.php", [
-    "title" => "Dashboard | UnReceipts",
+    "title" => $title,
     "user" => $user
 ]);

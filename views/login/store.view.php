@@ -11,8 +11,7 @@ if (!empty($errors)) {
 <?php require(base_path("views/partials/header.php")); ?>
 
 <main class="glass auth">
-    <form method="post" autocomplete="off">
-        <input type="hidden" name="action" value="login">
+    <form method="POST" action="/login" autocomplete="off">
         <label for="username">Username:</label>
         <input class="auth-info-input" type="text" name="username" id="username" value="<?= $_POST["username"] ?? '' ?>">
         <label for="password">Password:</label>
