@@ -1,7 +1,8 @@
 <?php
 
 use Core\App;
-use Core\Validator;
+use Core\Database;
+use Http\Forms\LoginForm;
 
 $errors = [];
 
@@ -10,33 +11,19 @@ $title = "Log in | UnReceipts";
 $username = $_POST["username"];
 $password = $_POST["password"];
 
-$valid_username = Validator::valid_string(
-    string: $username,
-    empty: "Username is required"
-);
-if ($valid_username !== true) {
-    $errors[] = $valid_username;
-}
+$form = new LoginForm();
 
-$valid_password = Validator::valid_string(
-    string: $password,
-    empty: "Password is required"
-);
-if ($valid_password !== true) {
-    $errors[] = $valid_password;
-}
-
-if (!empty($errors)) {
+if (!$form->validate($username, $password)) {
     return view(
-        "login/store.view.php",
+        "login/create.view.php",
         [
             "title" => $title,
-            "errors" => $errors
+            "errors" => $form->errors()
         ]
     );
 }
 
-$db = App::resolve('Core\Database');
+$db = App::resolve(Database::class);
 
 $query = "SELECT * FROM users WHERE username=:username";
 $user = $db->query($query, ["username" => $username])->fetch();
@@ -53,7 +40,7 @@ if ($user) {
 
 $errors[] = "Wrong username or password";
 return view(
-    "login/store.view.php",
+    "login/create.view.php",
     [
         "title" => $title,
         "errors" => $errors

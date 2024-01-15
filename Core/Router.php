@@ -71,7 +71,7 @@ class Router
             break;
         }
         if ($correct_uri && $correct_method) {
-            return require(base_path($route["controller"]));
+            return require(base_path("Http/controllers/{$route["controller"]}"));
         } else if (!$correct_uri) {
             abort(Response::NOT_FOUND, "Resource is not found.");
         } else if ($correct_uri && !$correct_method) {

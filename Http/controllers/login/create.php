@@ -3,7 +3,7 @@
 $title = "Log in | UnReceipts";
 
 view(
-    "login/store.view.php",
+    "login/create.view.php",
     [
         "title" => $title
     ]
