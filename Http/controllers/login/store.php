@@ -1,48 +1,20 @@
 <?php
 
-use Core\App;
-use Core\Database;
+use Core\Authenticator;
 use Http\Forms\LoginForm;
-
-$errors = [];
 
 $title = "Log in | UnReceipts";
 
-$username = $_POST["username"];
-$password = $_POST["password"];
+$form = LoginForm::validate($attributes = [
+    "username" => $_POST["username"],
+    "password" => $_POST["password"]
+]);
 
-$form = new LoginForm();
+$signedIn = Authenticator::attempt($attributes["username"], $attributes["password"]);
 
-if (!$form->validate($username, $password)) {
-    return view(
-        "login/create.view.php",
-        [
-            "title" => $title,
-            "errors" => $form->errors()
-        ]
-    );
+if (!$signedIn) {
+    $form->error("Wrong username or password")->throw();
+    redirect("/login");
 }
 
-$db = App::resolve(Database::class);
-
-$query = "SELECT * FROM users WHERE username=:username";
-$user = $db->query($query, ["username" => $username])->fetch();
-
-if ($user) {
-    $password_hash = $user["password"];
-
-    if (password_verify($password, $password_hash)) {
-        login($username);
-        header("Location: /dashboard");
-        die();
-    }
-}
-
-$errors[] = "Wrong username or password";
-return view(
-    "login/create.view.php",
-    [
-        "title" => $title,
-        "errors" => $errors
-    ]
-);
+redirect("/dashboard");

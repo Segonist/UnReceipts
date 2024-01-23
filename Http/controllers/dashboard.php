@@ -1,8 +1,10 @@
 <?php
 
+use Core\Session;
+
 $title = "Dashboard | UnReceipts";
 
-$user = $_SESSION["user"];
+$user = Session::get("user");
 
 view("dashboard.view.php", [
     "title" => $title,

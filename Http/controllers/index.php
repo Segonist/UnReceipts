@@ -1,7 +1,9 @@
 <?php
 
-if ($_SESSION["user"] ?? false) {
-    header("Location: /dashboard");
+use Core\Session;
+
+if (Session::has("user")) {
+    redirect("/dashboard");
 } else {
-    header("Location: /login");
+    redirect("/login");
 }

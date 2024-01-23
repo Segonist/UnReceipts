@@ -8,17 +8,21 @@ class Validator
     {
         return trim($string) === "";
     }
+
     public static function length_not_in_range(string $string, int $min = 1, int $max = INF)
     {
         return strlen($string) < $min || strlen($string) > $max;
     }
-    public static function not_equals(string $string, string $value) {
+
+    public static function not_equals(string $string, string $value)
+    {
         return $string !== $value;
     }
-    public static function valid_string($string, bool|string $empty=false, bool|array $not_in_range=false, bool|array $reg_exps=false, bool|array $not_equals=false)
+
+    public static function valid_string($string, bool|string $empty = false, bool|array $not_in_range = false, bool|array $reg_exps = false, bool|array $not_equals = false)
     {
         if ($empty !== false) {
-            if (Validator::empty($string)) { 
+            if (Validator::empty($string)) {
                 return $empty ?? '';
             }
         }

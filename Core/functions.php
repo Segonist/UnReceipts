@@ -35,18 +35,13 @@ function abort($code = 404, $message = "")
     return view("error.php", ["code" => $code, "message" => $message]);
 }
 
-function login($user)
+function redirect($path)
 {
-    $_SESSION["user"] = $user;
-
-    session_regenerate_id(true);
+    header("Location: {$path}");
+    die();
 }
 
-function logout()
+function old($key, $default = null)
 {
-    $_SESSION = [];
-    session_destroy();
-
-    $params = session_get_cookie_params();
-    setcookie("PHPSESSID", "", time() - 3600, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+    return Core\Session::get("old")[$key] ?? $default;
 }

@@ -4,14 +4,12 @@ namespace Http\Forms;
 
 use Core\Validator;
 
-class LoginForm
+class LoginForm extends Form
 {
-    private $errors = [];
-
-    public function validate($username, $password)
+    function __construct($attributes)
     {
         $valid_username = Validator::valid_string(
-            string: $username,
+            string: $attributes["username"],
             empty: "Username is required"
         );
         if ($valid_username !== true) {
@@ -19,18 +17,11 @@ class LoginForm
         }
 
         $valid_password = Validator::valid_string(
-            string: $password,
+            string: $attributes["password"],
             empty: "Password is required"
         );
         if ($valid_password !== true) {
             $this->errors[] = $valid_password;
         }
-
-        return empty($this->errors);
-    }
-
-    public function errors()
-    {
-        return $this->errors;
     }
 }

@@ -78,4 +78,9 @@ class Router
             abort(Response::METHOD_NOT_ALLOWED, "Request method is not allowed.");
         }
     }
+
+    public function previousUrl()
+    {
+        return $_SERVER["HTTP_REFERER"];
+    }
 }

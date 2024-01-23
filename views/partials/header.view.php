@@ -9,7 +9,7 @@
     </div>
 </header>
 <div class="glass user-actions toggle-menu" tabIndex="-1">
-    <?php if ($_SESSION["user"] ?? false) : ?>
+    <?php if (Core\Session::has("user")) : ?>
         <a href="/dashboard" class="btn user-action-button">Dashboard</a>
         <a href="#" class="btn user-action-button">Settings</a>
         <form method="POST" action="/login">
