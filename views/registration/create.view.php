@@ -1,11 +1,3 @@
-<?php
-if (!empty($errors)) {
-    foreach ($errors as $error) {
-        alert($error);
-    }
-}
-?>
-
 <?php require(base_path("views/partials/top_html_tags.php")); ?>
 
 <?php require(base_path("views/partials/header.php")); ?>

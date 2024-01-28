@@ -3,8 +3,6 @@
 use Core\Authenticator;
 use Http\Forms\RegisterForm;
 
-$title = "Register | UnReceipts";
-
 $form = RegisterForm::validate($attributes = [
     "username" => $_POST["username"],
     "password" => $_POST["password"],

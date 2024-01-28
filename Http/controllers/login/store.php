@@ -3,8 +3,6 @@
 use Core\Authenticator;
 use Http\Forms\LoginForm;
 
-$title = "Log in | UnReceipts";
-
 $form = LoginForm::validate($attributes = [
     "username" => $_POST["username"],
     "password" => $_POST["password"]

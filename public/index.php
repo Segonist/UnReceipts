@@ -25,6 +25,12 @@ require(base_path("routes.php"));
 $uri = parse_url($_SERVER["REQUEST_URI"])["path"];
 $method = $_POST["_request_method"] ?? $_SERVER["REQUEST_METHOD"];
 
+if (!empty(Session::get("errors"))) {
+    foreach (Session::get("errors") as $error) {
+        alert($error);
+    }
+}
+
 try {
     $router->route($uri, $method);
 } catch (ValidationExeption $exeption) {
