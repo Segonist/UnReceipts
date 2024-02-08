@@ -17,7 +17,7 @@ class Authenticator
             if (password_verify($password, $password_hash)) {
                 static::login($username);
 
-                return true;
+                return $user["id"];
             }
         }
 
@@ -33,6 +33,8 @@ class Authenticator
             "username" => $attributes["username"],
             "password" => password_hash($attributes["password"], PASSWORD_BCRYPT)
         ]);
+
+        return $db->lastInsertId();
     }
 
     public static function user_exists($username)

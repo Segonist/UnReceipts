@@ -15,4 +15,8 @@ if (!$signedIn) {
     redirect("/login");
 }
 
+Authenticator::login([
+    "id" => $signedIn,
+    "username" => $attributes["username"]
+]);
 redirect("/dashboard");

@@ -15,7 +15,10 @@ if ($username_taken) {
     $form->error("Account with username {$attributes['username']} alredy exist")->throw();
 }
 
-Authenticator::new_user($attributes);
+$new_user_id = Authenticator::new_user($attributes);
 
-Authenticator::login($attributes["username"]);
+Authenticator::login([
+    "id" => $new_user_id,
+    "username" => $attributes["username"]
+]);
 redirect("/dashboard");
