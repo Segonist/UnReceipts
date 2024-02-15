@@ -1,47 +1,55 @@
 <?php
 
-use Core\Router;
-use Core\Session;
-use Core\ValidationExeption;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+define('LARAVEL_START', microtime(true));
 
-session_start();
+/*
+|--------------------------------------------------------------------------
+| Check If The Application Is Under Maintenance
+|--------------------------------------------------------------------------
+|
+| If the application is in maintenance / demo mode via the "down" command
+| we will load this file so that any pre-rendered content can be shown
+| instead of starting the framework, which could cause an exception.
+|
+*/
 
-const BASE_PATH = __DIR__ . '/../';
-require(BASE_PATH . "Core/functions.php");
-
-spl_autoload_register(function ($class) {
-    $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
-    require(base_path("{$class}.php"));
-});
-
-require(base_path("bootstrap.php"));
-
-$router = new Router;
-require(base_path("routes.php"));
-$uri = parse_url($_SERVER["REQUEST_URI"])["path"];
-$method = $_POST["_request_method"] ?? $_SERVER["REQUEST_METHOD"];
-
-if (!empty(Session::get("errors"))) {
-    foreach (Session::get("errors") as $error) {
-        alert($error);
-    }
+if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php')) {
+    require $maintenance;
 }
 
-try {
-    $router->route($uri, $method);
-} catch (ValidationExeption $exeption) {
-    Session::flash("errors", $exeption->errors);
-    Session::flash("old", $exeption->old);
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| this application. We just need to utilize it! We'll simply require it
+| into the script here so we don't need to manually load our classes.
+|
+*/
 
-    redirect($router->previousUrl());
-}
+require __DIR__ . '/../vendor/autoload.php';
 
-Session::unflash();
-?>
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request using
+| the application's HTTP kernel. Then, we will send the response back
+| to this client's browser, allowing them to enjoy our application.
+|
+*/
 
-<link type="text/css" rel="stylesheet" href="<?= host_path('assets/styles/index.css') ?>">
-<script src="<?= host_path('assets/js/preventDrag.js') ?>"></script>
+$app = require_once __DIR__ . '/../bootstrap/app.php';
+
+$kernel = $app->make(Kernel::class);
+
+$response = $kernel->handle(
+    $request = Request::capture()
+)->send();
+
+$kernel->terminate($request, $response);
